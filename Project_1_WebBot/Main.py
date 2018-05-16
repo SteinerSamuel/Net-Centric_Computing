@@ -10,12 +10,16 @@ Information: This program was made for playing the game in a firefox window with
 
 # import statements
 from PIL import ImageGrab, ImageOps
-import os
+# import os # used for debugging make sure to comment out when running without debug
 import time
 import win32api
 import win32con
 import numpy
+import logging
 
+
+# configure logging
+logging.basicConfig(filename=str(time.time()).replace('.', '') + '.log', level=logging.INFO)
 
 # Dictionary to hold values for food on hand.
 foodOnHand = {'shrimp': 5,
@@ -78,7 +82,7 @@ def screengrab(x_pad=306, y_pad=232):
     """
     box = (x_pad+1, y_pad+1, x_pad+640, y_pad+480)
     im = ImageGrab.grab(box)
-    # im.save(os.getcwd() + '\\full_snap__' + str(int(time.time())) + '.png', 'PNG') # Debugging code makes a png screenshot
+    # im.save(os.getcwd() + '\\full_snap__' + str(int(time.time())) + '.png', 'PNG')                         # Debugging
     return im
 
 
@@ -93,7 +97,7 @@ def grab(x_pad=306, y_pad=232):
     im = ImageOps.grayscale(ImageGrab.grab(box))
     a = numpy.array(im.getcolors())
     a = a.sum()
-    print(a)
+    logging.debug('Color:' + a)
 
     return a
 
@@ -110,7 +114,7 @@ def grab_seat_one(x_pad, y_pad):
     im = ImageOps.grayscale(ImageGrab.grab(box))
     a = numpy.array(im.getcolors())
     a = a.sum()
-    # print(a)                                                                                              # Debugging
+    logging.debug(a)                                                                                         # Debugging
 
     return a
 
@@ -127,7 +131,7 @@ def grab_seat_two(x_pad, y_pad):
     im = ImageOps.grayscale(ImageGrab.grab(box))
     a = numpy.array(im.getcolors())
     a = a.sum()
-    # print(a)                                                                                              # Debugging
+    logging.debug(a)                                                                                         # Debugging
 
     return a
 
@@ -144,7 +148,7 @@ def grab_seat_three(x_pad, y_pad):
     im = ImageOps.grayscale(ImageGrab.grab(box))
     a = numpy.array(im.getcolors())
     a = a.sum()
-    # print(a)                                                                                              # Debugging
+    logging.debug(a)                                                                                         # Debugging
 
     return a
 
@@ -161,7 +165,7 @@ def grab_seat_four(x_pad, y_pad):
     im = ImageOps.grayscale(ImageGrab.grab(box))
     a = numpy.array(im.getcolors())
     a = a.sum()
-    # print(a)                                                                                              # Debugging
+    logging.debug(a)                                                                                         # Debugging
 
     return a
 
@@ -178,7 +182,7 @@ def grab_seat_five(x_pad, y_pad):
     im = ImageOps.grayscale(ImageGrab.grab(box))
     a = numpy.array(im.getcolors())
     a = a.sum()
-    # print(a)                                                                                              # Debugging
+    logging.debug(a)                                                                                         # Debugging
 
     return a
 
@@ -195,7 +199,7 @@ def grab_seat_six(x_pad, y_pad):
     im = ImageOps.grayscale(ImageGrab.grab(box))
     a = numpy.array(im.getcolors())
     a = a.sum()
-    # print(a)                                                                                              # Debugging
+    logging.debug(a)                                                                                         # Debugging
 
     return a
 
@@ -221,7 +225,7 @@ def leftclick():
     win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN, 0, 0)
     time.sleep(.1)
     win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP, 0, 0)
-    # print("Click.")
+    logging.info("Click.")
 
 
 def leftdown():
@@ -230,7 +234,7 @@ def leftdown():
     """
     win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN, 0, 0)
     time.sleep(.1)
-    print('left Down')
+    logging.info('left Down')
 
 
 def leftup():
@@ -239,7 +243,7 @@ def leftup():
     """
     win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP, 0, 0)
     time.sleep(.1)
-    print('left release')
+    logging.info('left release')
 
 
 def mousepos(cord, x_pad=306, y_pad=232):
@@ -254,14 +258,14 @@ def mousepos(cord, x_pad=306, y_pad=232):
 
 def get_cords(x_pad=306, y_pad=232):
     """
-    Prints the coordinates of the of the mouse when called on
+    Prints the coordinates of the of the mouse to the log file when called on
     :param x_pad: The x_padding of the x coordinate default is 306
     :param y_pad: the y_padding of the y coordinate default is 232
     """
     x, y = win32api.GetCursorPos()
     x = x - x_pad
     y = y - y_pad
-    print(x, y)
+    logging.info('x:' + x + 'y:' + y)
 
 
 def startgame():
@@ -328,7 +332,7 @@ def makefood(food):
     :param food: the sushi which needs to be made could be one of three basic sushi, caliroll, onigiri, or gunkan
     """
     if food == 'caliroll':
-        print('Making a caliroll')
+        logging.info('Making a caliroll')
         # updates food on hand with food spent to make roll
         foodOnHand['rice'] -= 1
         foodOnHand['nori'] -= 1
@@ -348,7 +352,7 @@ def makefood(food):
         time.sleep(1.5)
 
     elif food == 'onigiri':
-        print('Making a onigiri')
+        logging.info('Making a onigiri')
         # updates food on hand with food spent to make onigiri
         foodOnHand['rice'] -= 2
         foodOnHand['nori'] -= 1
@@ -369,7 +373,7 @@ def makefood(food):
         time.sleep(1.5)
 
     elif food == 'gunkan':
-        print('Making gunkan')
+        logging.info('Making gunkan')
         # updates food on hand with food spent to make gunkan
         foodOnHand['rice'] -= 1
         foodOnHand['nori'] -= 1
@@ -407,18 +411,18 @@ def buyfood(food):
         leftclick()
         s = screengrab()
         if s.getpixel(Cord.buy_rice) != (127, 127, 127):
-            print('Rice is available')
+            logging.info('Rice is available')
             mousepos(Cord.buy_rice)
             time.sleep(.1)
             leftclick()
             mousepos(Cord.delivery_norm)
             foodOnHand['rice'] += 10
             time.sleep(1)
-            print("Click")
+            logging.info("Click")
             leftclick()
             time.sleep(2.5)
         else:
-            print('Rice is unavailable')
+            logging.info('Rice is unavailable')
             mousepos(Cord.t_exit)
             leftclick()
             time.sleep(1)
@@ -434,18 +438,18 @@ def buyfood(food):
         s = screengrab()
         time.sleep(.1)
         if s.getpixel(Cord.t_nori) != (109, 123, 127):
-            print('Nori is available')
+            logging.info('Nori is available')
             mousepos(Cord.t_nori)
             time.sleep(.1)
             leftclick()
             mousepos(Cord.delivery_norm)
             foodOnHand['nori'] += 10
             time.sleep(1)
-            print("Click")
+            logging.info("Click")
             leftclick()
             time.sleep(2.5)
         else:
-            print('nori is unavailable')
+            logging.info('nori is unavailable')
             mousepos(Cord.t_exit)
             leftclick()
             time.sleep(1)
@@ -461,18 +465,18 @@ def buyfood(food):
         s = screengrab()
         time.sleep(.1)
         if s.getpixel(Cord.t_roe) != (109, 123, 127):
-            print('Roe is available')
+            logging.info('Roe is available')
             mousepos(Cord.t_roe)
             time.sleep(.1)
             leftclick()
             mousepos(Cord.delivery_norm)
             foodOnHand['roe'] += 10
             time.sleep(.5)
-            print("Click")
+            logging.info("Click")
             leftclick()
             time.sleep(2.5)
         else:
-            print('Roe is unavailable')
+            logging.info('Roe is unavailable')
             mousepos(Cord.t_exit)
             leftclick()
             time.sleep(1)
@@ -485,15 +489,15 @@ def checkfood():
     """
     printonhand()
     for i, j in foodOnHand.items():
-        print(i)
+        logging.info(i)
         if i == 'nori' or i == 'rice' or i == 'roe':
             if j <= 4:
-                print('%s is low and needs to be replenished' % i)
+                logging.info('%s is low and needs to be replenished' % i)
                 buyfood(i)
 
 
 def printonhand():
-    print(foodOnHand)
+    logging.info(foodOnHand)
 
 
 def check_bubs(x_pad=306, y_pad=232):
@@ -508,75 +512,75 @@ def check_bubs(x_pad=306, y_pad=232):
     s1 = grab_seat_one(x_pad, y_pad)
     if s1 != Blank.seat_1:
         if s1 in sushiTypes:
-            print('table 1 is occupied and needs %s' % sushiTypes[s1])
+            logging.info('table 1 is occupied and needs %s' % sushiTypes[s1])
             makefood(sushiTypes[s1])
         else:
-            print('sushi not found!\n sushiType = %i' % s1)
+            logging.error('sushi not found!\n sushiType = %i' % s1)
 
     else:
-        print('Table 1 unoccupied')
+        logging.info('Table 1 unoccupied')
 
     clear_tables()
     checkfood()
     s2 = grab_seat_two(x_pad, y_pad)
     if s2 != Blank.seat_2:
         if s2 in sushiTypes:
-            print('table 2 is occupied and needs %s' % sushiTypes[s2])
+            logging.info('table 2 is occupied and needs %s' % sushiTypes[s2])
             makefood(sushiTypes[s2])
         else:
-            print('sushi not found!\n sushiType = %i' % s2)
+            logging.error('sushi not found!\n sushiType = %i' % s2)
 
     else:
-        print('Table 2 unoccupied')
+        logging.info('Table 2 unoccupied')
 
     checkfood()
     s3 = grab_seat_three(x_pad, y_pad)
     if s3 != Blank.seat_3:
         if s3 in sushiTypes:
-            print('table 3 is occupied and needs %s' % sushiTypes[s3])
+            logging.info('table 3 is occupied and needs %s' % sushiTypes[s3])
             makefood(sushiTypes[s3])
         else:
-            print('sushi not found!\n sushiType = %i' % s3)
+            logging.error('sushi not found!\n sushiType = %i' % s3)
 
     else:
-        print('Table 3 unoccupied')
+        logging.info('Table 3 unoccupied')
 
     checkfood()
     s4 = grab_seat_four(x_pad, y_pad)
     if s4 != Blank.seat_4:
         if s4 in sushiTypes:
-            print('table 4 is occupied and needs %s' % sushiTypes[s4])
+            logging.info('table 4 is occupied and needs %s' % sushiTypes[s4])
             makefood(sushiTypes[s4])
         else:
-            print('sushi not found!\n sushiType = %i' % s4)
+            logging.error('sushi not found!\n sushiType = %i' % s4)
 
     else:
-        print('Table 4 unoccupied')
+        logging.info('Table 4 unoccupied')
 
     clear_tables()
     checkfood()
     s5 = grab_seat_five(x_pad, y_pad)
     if s5 != Blank.seat_5:
         if s5 in sushiTypes:
-            print('table 5 is occupied and needs %s' % sushiTypes[s5])
+            logging.info('table 5 is occupied and needs %s' % sushiTypes[s5])
             makefood(sushiTypes[s5])
         else:
-            print('sushi not found!\n sushiType = %i' % s5)
+            logging.error('sushi not found!\n sushiType = %i' % s5)
 
     else:
-        print('Table 5 unoccupied')
+        logging.info('Table 5 unoccupied')
 
     checkfood()
     s6 = grab_seat_six(x_pad, y_pad)
     if s6 != Blank.seat_6:
         if s6 in sushiTypes:
-            print('table 1 is occupied and needs %s' % sushiTypes[s6])
+            logging.info('table 1 is occupied and needs %s' % sushiTypes[s6])
             makefood(sushiTypes[s6])
         else:
-            print('sushi not found!\n sushiType = %i' % s6)
+            logging.error('sushi not found!\n sushiType = %i' % s6)
 
     else:
-        print('Table 6 unoccupied')
+        logging.info('Table 6 unoccupied')
 
     clear_tables()
 
