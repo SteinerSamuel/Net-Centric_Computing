@@ -1,0 +1,23 @@
+<form method="post" action="">
+    <table>
+        {% for field in form['add'] %}
+        <tr><td>{{ field.name }}</td><td>{{ field }}</td></tr>
+        {% endfor %}
+    </table>
+    <input type="submit" name="btn", value="Add">
+</form>
+{% if result['add'] != None %}
+{{ result['add'] }}
+{% endif %}
+
+<form method="post" action="">
+    <table>
+        {% for field in form['mul'] %}
+        <tr><td>{{ field.name }}</td><td>{{ field }}</td></tr>
+        {% endfor %}
+    </table>
+    <input type="submit" name="btn" value="Multiply">
+</form>
+{% if result['mul'] != None %}
+{{ result['mul'] }}
+{% endif %}
