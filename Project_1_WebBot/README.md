@@ -24,7 +24,7 @@ x in y
 
 global variables have been replaced as arguments
 
-
+I later changed the print lines with logging for a cleaner experience
 ## Videos
 The first finished version had a problem where the cursor for the delivery was too high shown in the video below:
 ### [Original Video](https://www.youtube.com/watch?time_continue=5&v=rBhMgZqbAUs "WebBot Test Video")
