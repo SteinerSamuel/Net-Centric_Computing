@@ -7,4 +7,6 @@ This project  showcases the application layer by looking at FLASK for scientists
 |Web Framework|[Flask Tutorial 1](FlaskTutorial1)|[Link](http://hplgit.github.io/web4sciapps/doc/pub/._web4sa_flask000.html#___sec0)|
 |Making a Flask application|[Flask Tutorial 1](FlaskTutorial1), [Flask Tutorial 2](FlaskTutorial2),[Flask Tutorial 3](FlaskTutorial3)|[Link](http://hplgit.github.io/web4sciapps/doc/pub/._web4sa_flask004.html#___sec5)|
 |Handling multiple input variables in Flask| [Flask Tutorial 4](FlaskTutorial4)|[Link](http://hplgit.github.io/web4sciapps/doc/pub/._web4sa_flask006.html#wf:vib:flask)|
-|
+|Exercise 4: Visualize Taylor polynomial approximations| [Exercise 4](Exercise4)|[Link](http://hplgit.github.io/web4sciapps/doc/pub/._web4sa_flask017.html#___sec56)|
+|Exercise 6: Make a web app with multiple apps| [Exercise 6](Exercise6)|[Link](http://hplgit.github.io/web4sciapps/doc/pub/._web4sa_flask017.html#___sec56)|
+|Extra Credit: Webcamera Application|[Extra](Extra)|No Link|
