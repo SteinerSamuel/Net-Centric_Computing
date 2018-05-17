@@ -23,5 +23,5 @@ The high-level learning objective of this module can be summarized as follows:
 | **Project** | **Name** | **Folder** | **Desc**|
 |:-------|:--------------------------------|:--------------------------|:----------------------------------------------|
 | 1      | WebBot                          | [Project 1: WebBot](Project_1_WebBot)| A bot designed to play [Sushi Go Round.](https://www.miniclip.com/games/sushi-go-round/en/ "Miniclip")
-| 2      | WebApplication                  | [Project 2: WebApplication](Project_2_WebApplication)|Multiple programs which showcase FLASK for scientists.|
+| 2      | WebApplication                  | [Project 2: WebApplication](Project_2_WebApplication)|A series of applications showcasing FLASK for scientists.|
 | 3      | Web Server                      | [Project 3: WebServer](Project_3_WebServer) | A multi-threaded web server.| 
