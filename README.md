@@ -19,3 +19,9 @@ The high-level learning objective of this module can be summarized as follows:
 **Course Text Website:** https://www.pearsonhighered.com/program/Kurose-Computer-Networking-A-Top-Down-Approach-7th-Edition/PGM1101673.html
 
 **Programming Language:** Python 3
+
+| **Project** | **Name** | **Folder** | **Desc**|
+|:-------|:--------------------------------|:--------------------------|:----------------------------------------------|
+| 1      | WebBot                          | ['Project_1_WebBot'](Project_1_WebBot)| A bot designed to play [Sushi Go Round](https://www.miniclip.com/games/sushi-go-round/en/ "Miniclip")
+| 2      | WebApplication                  | [`search.py`][search]     |
+| 3      | Web Server                      | [`search.py`][search]     |
