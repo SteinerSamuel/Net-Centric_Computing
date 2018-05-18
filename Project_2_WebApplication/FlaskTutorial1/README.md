@@ -1,4 +1,4 @@
-# Flask Tutorial 1: Web Framework
+# Flask Tutorial 1: Web Framework & Creating a Flask Application
 The purpose of this tutorial is to go over the core ideas of FLASK. This tutorial will go over the following:
 1. generate a web page with input data to your application,
 2. run the application to perform mathematical computations, and
